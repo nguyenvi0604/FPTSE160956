@@ -14,17 +14,6 @@ import java.util.regex.Pattern;
  */
 public class StudentValid {
 
-    public boolean checkPhoneNumberValid(String phone) {
-        if ((phone.length() >= 10 && phone.length() <= 12) && phone.charAt(0) == '0') {
-            for (int i = 2; i < phone.length(); i++) {
-                if (phone.charAt(i) < '0' || phone.charAt(i) > '9') {
-                    return false;
-                }
-            }
-            return true;
-        }
-        return false;
-    }
 
     private boolean checkYearValid(int year) {
         //get current year, month, day
@@ -95,6 +84,11 @@ public class StudentValid {
     }
     public boolean checkStudentIdValid(String studentId){
         String regexStudentId = "[A-Z]{2}[0-9]{6}";
+        /*
+        compile so sanh dinh dang
+        matcher : doi tuong can so sanh
+        matches: co tim thay hay khong
+         */
         boolean isMatches = Pattern.compile(regexStudentId).matcher(studentId).matches();
         return isMatches;
     }

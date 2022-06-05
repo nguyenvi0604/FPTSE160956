@@ -20,22 +20,26 @@ import subject.SubjectService;
  */
 public class GradeService {
 
-    private static Map<String, Map<String, Grade>> myGrade = new HashMap<>();
+    private static Map<String, Map<String, Grade>> studentIdMapWithStubjectNameMapWithGrade = new HashMap<>();
     private Scanner sc = new Scanner(System.in);
 
     public Map<String, Grade> getSubjectIdAndGradeByStudentID(String studentID) {
-        return myGrade.get(studentID);
+        return studentIdMapWithStubjectNameMapWithGrade.get(studentID);
     }
 
     public Double getAverageBySubjectId(String studentId, String subjectId) {
-        return myGrade.get(studentId).get(subjectId).getAverage();
+        return studentIdMapWithStubjectNameMapWithGrade.get(studentId).get(subjectId).getAverage();
     }
 
+    /*
+    Ho tro lay student Id va Student Nam bang subject Id
+    Sau do sort by student name
+     */
     public Map<String, String> getStudentIdAndStudentNameBySubjectId(String subjectId) {
         StudentService studentService = new StudentService();
         Map<String, String> studentIdMapWithStudentName = new HashMap<>();
-        for (String studentId : myGrade.keySet()) {
-            if (myGrade.get(studentId).containsKey(subjectId)) {
+        for (String studentId : studentIdMapWithStubjectNameMapWithGrade.keySet()) {
+            if (studentIdMapWithStubjectNameMapWithGrade.get(studentId).containsKey(subjectId)) {
                 String studentName = studentService.getNameByStudentID(studentId);
                 studentIdMapWithStudentName.put(studentId, studentName);
             }
@@ -64,7 +68,7 @@ public class GradeService {
     }
 
     private boolean isStudentIdExistInMyGrade(String studentID) {
-        return myGrade.containsKey(studentID);
+        return studentIdMapWithStubjectNameMapWithGrade.containsKey(studentID);
     }
 
     private String inputStudentId() {
@@ -88,13 +92,13 @@ public class GradeService {
             System.out.println("Have no subject input before!");
             return;
         }
-        String studentID = inputStudentId().trim();
+        String studentID = inputStudentId().toUpperCase();
         if (!checkStudentID(studentID)) {
             System.out.println("Student does not exist!");
             return;
         }
 
-        String subjectID = inputSubjectId().trim();
+        String subjectID = inputSubjectId().trim().toUpperCase();
         if (!checkSubjectID(subjectID)) {
             System.out.println("Subject does not exist!");
             return;
@@ -105,7 +109,7 @@ public class GradeService {
             System.out.println("Input successfully!");
             return;
         }
-        if (!myGrade.get(studentID).containsKey(subjectID)) {
+        if (!studentIdMapWithStubjectNameMapWithGrade.get(studentID).containsKey(subjectID)) {
             System.out.println("Input grade of " + subjectID);
             insertGrade(studentID, subjectID);
             System.out.println("Input successfully!");
@@ -126,10 +130,10 @@ public class GradeService {
         }
         System.out.println("You choose overwrite!");
         Grade inputGrade = inputGradeToSubject();
-        Map<String, Grade> subjectIdMapWithGrade = myGrade.get(studentId);
+        Map<String, Grade> subjectIdMapWithGrade = studentIdMapWithStubjectNameMapWithGrade.get(studentId);
         subjectIdMapWithGrade.put(subjectId, inputGrade);
 
-        myGrade.put(studentId, subjectIdMapWithGrade);
+        studentIdMapWithStubjectNameMapWithGrade.put(studentId, subjectIdMapWithGrade);
         System.out.println("Input successfully!");
     }
 
@@ -137,14 +141,14 @@ public class GradeService {
         Grade inputGrade = inputGradeToSubject();
         Map<String, Grade> subjectIdMapWithGrade = new HashMap<>();
         subjectIdMapWithGrade.put(subjectID, inputGrade);
-        myGrade.put(studentID, subjectIdMapWithGrade);
+        studentIdMapWithStubjectNameMapWithGrade.put(studentID, subjectIdMapWithGrade);
     }
 
     private void insertGrade(String studentID, String subjectID) {
         Grade inputGrade = inputGradeToSubject();
-        Map<String, Grade> subjectIdMapWithGrade = myGrade.get(studentID);
+        Map<String, Grade> subjectIdMapWithGrade = studentIdMapWithStubjectNameMapWithGrade.get(studentID);
         subjectIdMapWithGrade.put(subjectID, inputGrade);
-        myGrade.put(studentID, subjectIdMapWithGrade);
+        studentIdMapWithStubjectNameMapWithGrade.put(studentID, subjectIdMapWithGrade);
     }
 
     private boolean checkGradeValid(Double grade){

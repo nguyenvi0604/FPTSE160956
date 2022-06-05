@@ -1,3 +1,6 @@
 /.idea/
-/StudentManagementProgram.iml
+/build/
+/dist/
+/nbproject/
 /out/
+/*.iml

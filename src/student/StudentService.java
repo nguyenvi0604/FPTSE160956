@@ -24,16 +24,18 @@ public class StudentService {
     StudentValid studentValid = new StudentValid();
     private static Map<String, Student> myStudents = new HashMap<>();
 
+    /*
+    Support for function show 6 7
+     */
     public String getNameByStudentID(String studentID) {
         Student student = myStudents.get(studentID);
         return student.getFirstName() + " " + student.getLastName();
     }
-
+    /*
+    Support for check null function 5 6 7
+    */
     public Map studentIdMapWithStudent(){
         return myStudents;
-    }
-    public Student getStudentByStudentId(String studentID) {
-        return myStudents.get(studentID);
     }
 
     public String inputStID() {
@@ -54,10 +56,16 @@ public class StudentService {
         return newStudentId;
     }
 
+    /*
+    Support for search student id
+     */
     public boolean searchStID(String studentID) {
         return myStudents.containsKey(studentID);
     }
 
+    /*
+    Check string is null or not -> support function input
+     */
     private String returnStringSIfValueIsNotEmpty(String s) {
         while (s.isEmpty()) {
             System.out.println("Please do not leave this section blank!");
@@ -113,6 +121,9 @@ public class StudentService {
             if (data.matches(dateFormat)) {
                 try {
                     StudentValid validation = new StudentValid();
+                    /*
+                    StringTokenizer ho tro cat chuoi data thanh nhung chuoi nho tai vi tri "/"
+                     */
                     StringTokenizer st = new StringTokenizer(data, "/");
                     day = Integer.parseInt(st.nextToken());
                     month = Integer.parseInt(st.nextToken());
@@ -121,12 +132,18 @@ public class StudentService {
                         date = getDate(data);
                         check = false;
                     }else{
+                        /*
+                        truong hop nay sai khi nhap fake ngay sinh
+                         */
                         System.out.println("Please input your real date!");
                     }
                 } catch (NumberFormatException e) {
-                    System.out.println("Please input your real date of birth!");
+                    System.out.println(e.getMessage());
                 }
             }else{
+                /*
+                sai khi nhap sai dinh dang
+                 */
                 System.out.println("Please input like form example(dd/MM/yyyy)!");
             }
         }
@@ -134,7 +151,7 @@ public class StudentService {
     }
 
     /*
-    Ho tro ham Input date
+    Ho tro ham Input date ( chuyen string s thanh date)
      */
     private Date getDate(String s) {
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");

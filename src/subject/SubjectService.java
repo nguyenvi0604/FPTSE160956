@@ -19,9 +19,16 @@ public class SubjectService {
 
     private Scanner sc = new Scanner(System.in);
 
+    /*
+    Ho tro ham in o function 6 va 7
+     */
     public String getSubjectNameBySubjectId(String subjectId) {
         return mySubjectList.get(subjectId).getSubjectName();
     }
+
+    /*
+    ho tro check null subject o function 6 va 7
+     */
     public HashMap subjectIdMapWithSubject(){
         return mySubjectList;
     }
@@ -130,6 +137,9 @@ public class SubjectService {
         System.out.println("Update information successfully");
     }
 
+    /*
+    ho tro tim kiem subject id
+     */
     public boolean searchSubjectID(String subjectID) {
         return mySubjectList.containsKey(subjectID);
     }
@@ -162,11 +172,18 @@ public class SubjectService {
         } while (checkTF);
     }
 
+    /*
+    dung de sort subject name
+    B1: tao moi hashmap se chua subjectId va OOP subject
+    B2: lay key la subjectId va value là OOP subject
+    B3: Goi subject comparator trong pakage da tao san -> put cai map vua co o B2
+    B4: dung treemap de tan dung comparator co san trong treemap
+    B5: Nho put vao
+     */
     public Map<String, Subject> sortBySubjectName(Set<String> subjectIds) {
         Map<String, Subject> subjectMap = new HashMap<>();
         for (String subjectID : subjectIds) {
             subjectMap.put(subjectID, mySubjectList.get(subjectID));
-            // <String, String> studentIdMapWithLastName;
         }
 
         SubjectNameComparator subjectNameComparator = new SubjectNameComparator(subjectMap);
