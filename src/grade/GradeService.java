@@ -63,7 +63,7 @@ public class GradeService {
 
     private String inputStudentId() {
         System.out.println("Input student ID: ");
-        return sc.next();
+        return sc.next().trim();
     }
 
     private String inputSubjectId() {
