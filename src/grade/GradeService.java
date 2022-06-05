@@ -102,11 +102,13 @@ public class GradeService {
         if (!isStudentIdExistInMyGrade(studentID)) {
             System.out.println("Input grade of " + subjectID);
             insertNewGrade(studentID, subjectID);
+            System.out.println("Input successfully!");
             return;
         }
         if (!myGrade.get(studentID).containsKey(subjectID)) {
             System.out.println("Input grade of " + subjectID);
             insertGrade(studentID, subjectID);
+            System.out.println("Input successfully!");
             return;
         }
         overwriteGrade(studentID, subjectID);
@@ -128,6 +130,7 @@ public class GradeService {
         subjectIdMapWithGrade.put(subjectId, inputGrade);
 
         myGrade.put(studentId, subjectIdMapWithGrade);
+        System.out.println("Input successfully!");
     }
 
     private void insertNewGrade(String studentID, String subjectID) {
