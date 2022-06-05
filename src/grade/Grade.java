@@ -30,6 +30,7 @@ public class Grade {
     }
 
     public Double getGradeLabs() {
+
         return gradeLabs;
     }
 
