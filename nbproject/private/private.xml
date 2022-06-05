@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-private xmlns="http://www.netbeans.org/ns/project-private/1">
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+        <group>
+            <file>file:/E:/JavaV/StudentManagementProgram/src/subject/Subject.java</file>
+            <file>file:/E:/JavaV/StudentManagementProgram/src/subject/SubjectService.java</file>
+            <file>file:/E:/JavaV/StudentManagementProgram/src/grade/ShowGradeByStudenID.java</file>
+            <file>file:/E:/JavaV/StudentManagementProgram/src/student/StudentValid.java</file>
+            <file>file:/E:/JavaV/StudentManagementProgram/src/student/Student.java</file>
+            <file>file:/E:/JavaV/StudentManagementProgram/src/grade/ShowListStudentLearnBySubjectID.java</file>
+            <file>file:/E:/JavaV/StudentManagementProgram/src/controllers/Main.java</file>
+            <file>file:/E:/JavaV/StudentManagementProgram/src/grade/GradeService.java</file>
+            <file>file:/E:/JavaV/StudentManagementProgram/src/grade/Grade.java</file>
+            <file>file:/E:/JavaV/StudentManagementProgram/src/student/StudentService.java</file>
+        </group>
+    </open-files>
+</project-private>
