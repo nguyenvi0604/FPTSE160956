@@ -8,6 +8,7 @@ package grade;
 import java.util.Map;
 import java.util.Scanner;
 import student.StudentService;
+import subject.Subject;
 import subject.SubjectService;
 
 public class ShowGradeByStudenID {
@@ -45,22 +46,14 @@ public class ShowGradeByStudenID {
         System.out.println("Student name: " + studentService.getNameByStudentID(studentID));
         System.out.println("| ++No++ | +++++++Subject name+++++++ | ++Average mark++ | ++Status++ |");
         Map<String, Grade> subjectsAndGradeByStudentID = gradeService.getSubjectIdAndGradeByStudentID(studentID);
+
+        Map<String, Subject> sortedBySubjectName = subjectService.sortBySubjectName(subjectsAndGradeByStudentID.keySet());
+
         int count = 1;
-        for (String subjectId : subjectsAndGradeByStudentID.keySet()) {
-            //System.out.println("     "+ count + "             "+ subjectService.getSubjectNameBySubjectId(subjectId)+"     " + gradeService.getAverageBySubjectId(studentID, subjectId) );
+        for (String subjectId : sortedBySubjectName.keySet()) {
             System.out.format("|%5d   | %24s   | %8.1f         |  %s     |\n", count, subjectService.getSubjectNameBySubjectId(subjectId), gradeService.getAverageBySubjectId(studentID, subjectId), gradeService.getStatus(studentID, subjectId));
             count++;
         }
         System.out.println();
-    }
-
-    public void showStudentListBySubjectId() {
-        String subjectId = "sb1";
-        System.out.println("Subject: " + subjectService.getSubjectNameBySubjectId(subjectId));
-        Map<String, String> studentIdMapWithStudentName = gradeService.getStudentIdAndStudentNameBySubjectId(subjectId);
-        studentIdMapWithStudentName.entrySet().forEach((x) -> {
-            System.out.println(x);
-        });
-
     }
 }

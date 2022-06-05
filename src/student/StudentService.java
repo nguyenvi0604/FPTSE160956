@@ -90,7 +90,7 @@ public class StudentService {
         boolean flag = true;
         do {
             System.out.print("Input your gender(MALE or FEMALE): ");
-            gender = sc.nextLine();
+            gender = sc.nextLine().toUpperCase();
             returnStringSIfValueIsNotEmpty(gender);
             if (studentValid.checkGenderValid(gender)) {
                 flag = false;
@@ -249,7 +249,7 @@ public class StudentService {
 
     public void updateStudentFunction() {
         System.out.print("Input student ID need to update: ");
-        String stIDUpdate = sc.next();
+        String stIDUpdate = sc.next().trim().toUpperCase();
         boolean flag = true;
         do {
             boolean flagCheckStudentID = searchStID(stIDUpdate);

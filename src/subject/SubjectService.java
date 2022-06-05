@@ -5,8 +5,9 @@
  */
 package subject;
 
-import java.util.HashMap;
-import java.util.Scanner;
+import comparator.SubjectNameComparator;
+
+import java.util.*;
 
 /**
  *
@@ -32,7 +33,7 @@ public class SubjectService {
             tach ham nhap
              */
             System.out.print("Input new subject ID: ");
-            newSubjectID = sc.next();
+            newSubjectID = sc.next().toUpperCase();
             checkDuplicatedSubject = mySubjectList.containsKey(newSubjectID);
             if (checkDuplicatedSubject) {
                 System.out.println("This ID subject already have!");
@@ -78,7 +79,7 @@ public class SubjectService {
 
     public void addNewSubject() {
         Subject sb = new Subject();
-        String newSubjectID = addNewSubjectID();
+        String newSubjectID = addNewSubjectID().toUpperCase();
         sb.setSubjectID(newSubjectID);
 
         String newSubjectName = addNewSubjectName();
@@ -135,7 +136,7 @@ public class SubjectService {
 
     public void updateSubjectFunction() {
         System.out.println("Input the subject ID need to update information: ");
-        String subjectID = sc.next();
+        String subjectID = sc.next().toUpperCase();
         boolean checkTF = searchSubjectID(subjectID);
         if (!checkTF) {
             System.out.println("Subject does not exist.");
@@ -159,5 +160,18 @@ public class SubjectService {
                     checkTF = false;
             }
         } while (checkTF);
+    }
+
+    public Map<String, Subject> sortBySubjectName(Set<String> subjectIds) {
+        Map<String, Subject> subjectMap = new HashMap<>();
+        for (String subjectID : subjectIds) {
+            subjectMap.put(subjectID, mySubjectList.get(subjectID));
+            // <String, String> studentIdMapWithLastName;
+        }
+
+        SubjectNameComparator subjectNameComparator = new SubjectNameComparator(subjectMap);
+        TreeMap<String, Subject> result = new TreeMap<>(subjectNameComparator);
+        result.putAll(subjectMap);
+        return result;
     }
 }

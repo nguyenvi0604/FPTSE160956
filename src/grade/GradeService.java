@@ -8,6 +8,9 @@ package grade;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
+import java.util.TreeMap;
+
+import comparator.StudentNameComparator;
 import student.StudentService;
 import subject.SubjectService;
 
@@ -37,7 +40,10 @@ public class GradeService {
                 studentIdMapWithStudentName.put(studentId, studentName);
             }
         }
-        return studentIdMapWithStudentName;
+        StudentNameComparator studentNameComparator = new StudentNameComparator(studentIdMapWithStudentName);
+        Map<String,String> softByStudentName = new TreeMap<>(studentNameComparator);
+        softByStudentName.putAll(studentIdMapWithStudentName);
+        return softByStudentName;
     }
 
     public String getStatus(String studentId, String subjectId) {
@@ -82,13 +88,13 @@ public class GradeService {
             System.out.println("Have no subject input before!");
             return;
         }
-        String studentID = inputStudentId();
+        String studentID = inputStudentId().trim();
         if (!checkStudentID(studentID)) {
             System.out.println("Student does not exist!");
             return;
         }
 
-        String subjectID = inputSubjectId();
+        String subjectID = inputSubjectId().trim();
         if (!checkSubjectID(subjectID)) {
             System.out.println("Subject does not exist!");
             return;

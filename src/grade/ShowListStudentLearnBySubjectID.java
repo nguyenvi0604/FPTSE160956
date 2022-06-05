@@ -55,7 +55,8 @@ public class ShowListStudentLearnBySubjectID {
         }
         System.out.println("|++Student ID++|++++++Student name++++++|++Average mark++|++Status++|");
         studentIdMapWithStudentName.entrySet().forEach((x) -> {
-            System.out.format("|%14s|%24s|%9.2f       |%10s|\n", x.getKey(), x.getValue(), gradeService.getAverageBySubjectId(x.getKey(), subjectId), gradeService.getStatus(x.getKey(), subjectId));
+            System.out.format("|%14s|%24s|%9.2f       |%10s|\n", x.getKey(),
+                    x.getValue(), gradeService.getAverageBySubjectId(x.getKey(), subjectId), gradeService.getStatus(x.getKey(), subjectId));
         });
     }
 }
