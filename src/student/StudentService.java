@@ -5,6 +5,8 @@
  */
 package student;
 
+import grade.GradeService;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -23,6 +25,8 @@ public class StudentService {
     Scanner sc = new Scanner(System.in);
     StudentValid studentValid = new StudentValid();
     private static Map<String, Student> myStudents = new HashMap<>();
+
+    private final GradeService gradeService = new GradeService();
 
     /*
     Support for function show 6 7
@@ -103,7 +107,7 @@ public class StudentService {
             if (studentValid.checkGenderValid(gender)) {
                 flag = false;
             } else {
-                System.out.print("\nOnly input MALE or FEMALE!");
+                System.out.print("Only input MALE or FEMALE!");
             }
         } while (flag);
         return gender;
@@ -188,7 +192,7 @@ public class StudentService {
          */
         String phoneNumber;
         sc = new Scanner(System.in);
-        System.out.println("Input your phone number: ");
+        System.out.print("Input your phone number: ");
         phoneNumber = sc.next();
         while ((phoneNumber.length() < 9 || phoneNumber.length() > 12) || phoneNumber.charAt(0)!='0') {
             System.out.print("Pleases input your real phone number: ");
@@ -251,6 +255,7 @@ public class StudentService {
 
     private void deleteStudent(String id) {
         myStudents.remove(id);
+        gradeService.removeStudent(id);
         System.out.println("Delete successfully!");
     }
 

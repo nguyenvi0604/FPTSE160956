@@ -37,19 +37,25 @@ public class ShowGradeByStudenID {
             System.out.println("Have no subject input before!");
             return;
         }
-        String studentID = inputStudentId();
+        String studentID = inputStudentId().toUpperCase();
         if (!checkStudentID(studentID)) {
             System.out.println("Student does not exist!");
             return;
         }
-
+        int count = 1;
         System.out.println("Student name: " + studentService.getNameByStudentID(studentID));
         System.out.println("| ++No++ | +++++++Subject name+++++++ | ++Average mark++ | ++Status++ |");
         Map<String, Grade> subjectsAndGradeByStudentID = gradeService.getSubjectIdAndGradeByStudentID(studentID);
+//        if (subjectsAndGradeByStudentID.size() == 1) {
+//            for (String subjectId : subjectsAndGradeByStudentID.keySet()) {
+//                System.out.format("|%5d   | %24s   | %8.1f         |  %s     |\n", count, subjectService.getSubjectNameBySubjectId(subjectId), gradeService.getAverageBySubjectId(studentID, subjectId), gradeService.getStatus(studentID, subjectId));
+//                count++;
+//            }
+//            return;
+//        }
 
         Map<String, Subject> sortedBySubjectName = subjectService.sortBySubjectName(subjectsAndGradeByStudentID.keySet());
 
-        int count = 1;
         for (String subjectId : sortedBySubjectName.keySet()) {
             System.out.format("|%5d   | %24s   | %8.1f         |  %s     |\n", count, subjectService.getSubjectNameBySubjectId(subjectId), gradeService.getAverageBySubjectId(studentID, subjectId), gradeService.getStatus(studentID, subjectId));
             count++;

@@ -39,7 +39,7 @@ public class ShowListStudentLearnBySubjectID {
             System.out.println("Have no subject input before!");
             return;
         }
-        String subjectId = inputSubjectID();
+        String subjectId = inputSubjectID().toUpperCase();
         if (subjectId == null) {
             System.out.println("Subject does not exist");
             return;

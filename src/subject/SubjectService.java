@@ -6,6 +6,7 @@
 package subject;
 
 import comparator.SubjectNameComparator;
+import grade.GradeService;
 
 import java.util.*;
 
@@ -17,6 +18,7 @@ public class SubjectService {
 
     private static HashMap<String, Subject> mySubjectList = new HashMap<>();
 
+    private final GradeService gradeService = new GradeService();
     private Scanner sc = new Scanner(System.in);
 
     /*
@@ -115,6 +117,7 @@ public class SubjectService {
         switch (confirmYN) {
             case "Y":
                 mySubjectList.remove(subjectID);
+                gradeService.removeSubjectBySubjectId(subjectID);
                 break;
             case "N":
                 System.out.println("Delete fail!");
@@ -185,7 +188,9 @@ public class SubjectService {
         for (String subjectID : subjectIds) {
             subjectMap.put(subjectID, mySubjectList.get(subjectID));
         }
-
+        if(subjectMap.size()==1){
+            return subjectMap;
+        }
         SubjectNameComparator subjectNameComparator = new SubjectNameComparator(subjectMap);
         TreeMap<String, Subject> result = new TreeMap<>(subjectNameComparator);
         result.putAll(subjectMap);
